@@ -12,3 +12,7 @@ git subtree pull --prefix java https://github.com/agileorbit-cookbooks/java.git 
 ### Kafka
 
 git subtree pull --prefix kafka https://github.com/mthssdrbrg/kafka-cookbook.git master --squash
+
+### Hadoop
+
+git subtree pull --prefix hadoop https://github.com/continuuity/hadoop_cookbook.git master --squash
