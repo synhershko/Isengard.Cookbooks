@@ -16,3 +16,7 @@ git subtree pull --prefix kafka https://github.com/mthssdrbrg/kafka-cookbook.git
 ### Hadoop
 
 git subtree pull --prefix hadoop https://github.com/continuuity/hadoop_cookbook.git master --squash
+
+### Elasticsearch
+
+git subtree pull --prefix elasticsearch https://github.com/elasticsearch/cookbook-elasticsearch.git master --squash
