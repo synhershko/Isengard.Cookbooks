@@ -28,3 +28,7 @@ git subtree pull --prefix apt https://github.com/opscode-cookbooks/apt.git maste
 ### yum
 
 git subtree pull --prefix yum https://github.com/opscode-cookbooks/yum.git master --squash
+
+### build-essential
+
+git subtree pull --prefix build-essential https://github.com/opscode-cookbooks/build-essential.git master --squash
