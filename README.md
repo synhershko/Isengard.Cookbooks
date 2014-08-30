@@ -20,3 +20,11 @@ git subtree pull --prefix hadoop https://github.com/continuuity/hadoop_cookbook.
 ### Elasticsearch
 
 git subtree pull --prefix elasticsearch https://github.com/elasticsearch/cookbook-elasticsearch.git master --squash
+
+### apt
+
+git subtree pull --prefix apt https://github.com/opscode-cookbooks/apt.git master --squash
+
+### yum
+
+git subtree pull --prefix yum https://github.com/opscode-cookbooks/yum.git master --squash
