@@ -13,6 +13,10 @@ git subtree pull --prefix java https://github.com/agileorbit-cookbooks/java.git 
 
 git subtree pull --prefix kafka https://github.com/mthssdrbrg/kafka-cookbook.git master --squash
 
+### ZooKeeper
+
+git subtree pull --prefix zookeeper https://github.com/SimpleFinance/chef-zookeeper.git master --squash
+
 ### Hadoop
 
 git subtree pull --prefix hadoop https://github.com/continuuity/hadoop_cookbook.git master --squash
@@ -32,3 +36,7 @@ git subtree pull --prefix yum https://github.com/opscode-cookbooks/yum.git maste
 ### build-essential
 
 git subtree pull --prefix build-essential https://github.com/opscode-cookbooks/build-essential.git master --squash
+
+### runit
+
+git subtree pull --prefix runit https://github.com/hw-cookbooks/runit.git master --squash
