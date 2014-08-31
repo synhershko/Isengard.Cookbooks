@@ -5,4 +5,5 @@ include_recipe 'zookeeper::install'
 include_recipe 'zookeeper::config_render'
 
 # start as a service
+include_recipe "runit::default"
 include_recipe "zookeeper::service"
