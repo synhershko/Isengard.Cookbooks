@@ -29,6 +29,10 @@ git subtree pull --prefix elasticsearch https://github.com/elasticsearch/cookboo
 
 git subtree pull --prefix apt https://github.com/opscode-cookbooks/apt.git master --squash
 
+### yum-epel
+
+git subtree pull --prefix yum-epel https://github.com/opscode-cookbooks/yum-epel.git master --squash
+
 ### yum
 
 git subtree pull --prefix yum https://github.com/opscode-cookbooks/yum.git master --squash
