@@ -1,6 +1,17 @@
 # Java version etc is determined and configured via attributes
 include_recipe 'java'
 
+# install ZK gem so we can then verify the Kafka broker was registered with our ZK ensemble
+# For OpsWorks compatibility see https://forums.aws.amazon.com/thread.jspa?threadID=118646
+if defined?(OpsWorks) && defined?(OpsWorks::InternalGems)
+  OpsWorks::InternalGems.internal_gem_package('zookeeper', :version => '>= 1.4.9')
+else
+  chef_gem 'zookeeper' do
+    action :install
+    version '>= 1.4.9'
+  end
+end
+
 # set vm.swapiness to 0 (to lessen swapping)
 #sysctl_param 'vm.swappiness' do
 #  value 0
