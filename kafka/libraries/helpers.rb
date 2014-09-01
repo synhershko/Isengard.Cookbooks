@@ -110,3 +110,26 @@ def kafka_service_actions
   actions << :start if start_automatically?
   actions
 end
+
+def kafka_log_dirs
+  dirs = []
+  dirs += Array(node.kafka.broker['log.dirs'])
+  dirs += Array(node.kafka.broker.fetch(:log_dirs, []))
+  dirs += Array(node.kafka.broker.fetch(:log, {}).fetch(:dirs, []))
+  dirs.uniq!
+  dirs
+end
+
+def broker_attribute?(*parts)
+  parts = parts.map(&:to_s)
+  broker = node.kafka.broker
+  if (v = broker.fetch(parts.join('.'), nil))
+    return v
+  end
+  if (v = broker.fetch(parts.join('_'), nil))
+    return v
+  end
+  key = parts.pop
+  r = parts.reduce(broker) { |b, p| b.fetch(p, b) }
+  r.fetch(key, nil)
+end
