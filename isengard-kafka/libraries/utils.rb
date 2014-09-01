@@ -17,6 +17,28 @@
 # limitations under the License.
 #
 
+def znode_exists?(znode_path, zk_host="localhost:2181")
+  require 'rubygems'
+  require 'zookeeper'
+  znode_found = false
+  begin
+    @zk = Zookeeper.new(zk_host)
+    if !@zk.connected?
+      raise "znode_exists : Unable to connect to zookeeper"
+    end 
+    r = @zk.get(:path => znode_path)
+    if r[:rc] == 0
+      znode_found = true
+    end 
+  rescue Exception => e
+    puts e.message
+  ensure
+    @zk.close unless @zk.closed?
+  end
+  return znode_found
+end
+
+
 # The method GET_ZK_NODES searches for Zookeeper nodes at two levels (Run List and Roles).
 # During a chef-client run a run list is updated before the chef-client run and is available for 
 # searching nodes. Roles and recipes are updated after the chef-client run completes and commits 
@@ -28,5 +50,5 @@ def get_zk_nodes
   ro_results = search(:node, "roles:Kafka-Head-Zookeeper AND chef_environment:#{node.chef_environment}")
   ro_results.map!{|x| x[:hostname] == node[:hostname] ? node : x}
   results = rl_results.concat ro_results
-  return results.uniq{|x| float_host(x[:hostname])}.sort
+  return results.uniq{|x| x[:hostname]}.sort
 end
