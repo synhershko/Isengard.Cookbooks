@@ -93,27 +93,10 @@ default.kafka.automatic_start = false
 default.kafka.automatic_restart = false
 
 #
-# Id of the (current) Kafka broker being set up. This must be set to a unique
-# integer for each broker.
-# NOTE: mod the broker id by the largest 32 bit unsigned int to avoid
-# Kafka choking on the value when it tries to start up.
-default.kafka.broker.broker_id = node.ipaddress.gsub('.', '').to_i % 2**31
-
-# Socket server configuration
-#
-# The port on which the server accepts client connections.
-default.kafka.broker.port = 6667
-
-#
-# Hostname of broker. If this is set, it will only bind to this address.
-# If this is not set, it will bind to all interfaces, and publish one to ZK.
-default.kafka.broker.host_name = node.hostname
-
-#
-# A list of directory paths in which Kafka data is stored.
-# Each new partition that is created will be placed in the directory which
-# currently has the fewest partitions.
-default.kafka.broker.log_dirs = []
+# `broker` namespace for configuration of a broker.
+# Initially set it to an empty Hash to avoid having `fetch(:broker, {})`
+# statements in helper methods and the alike.
+default.kafka.broker = {}
 
 #
 # Root logger configuration.
@@ -124,7 +107,7 @@ default.kafka.log4j.root_logger = 'INFO, kafkaAppender'
 default.kafka.log4j.appenders = {
   'kafkaAppender' => {
     type: 'org.apache.log4j.DailyRollingFileAppender',
-    date_pattern: '"."yyyy-MM-dd',
+    date_pattern: '.yyyy-MM-dd',
     file: %(#{node.kafka.log_dir}/kafka.log),
     layout: {
       type: 'org.apache.log4j.PatternLayout',
@@ -133,7 +116,7 @@ default.kafka.log4j.appenders = {
   },
   'stateChangeAppender' => {
     type: 'org.apache.log4j.DailyRollingFileAppender',
-    date_pattern: '"."yyyy-MM-dd',
+    date_pattern: '.yyyy-MM-dd',
     file: %(#{node.kafka.log_dir}/kafka-state-change.log),
     layout: {
       type: 'org.apache.log4j.PatternLayout',
@@ -142,7 +125,7 @@ default.kafka.log4j.appenders = {
   },
   'requestAppender' => {
     type: 'org.apache.log4j.DailyRollingFileAppender',
-    date_pattern: '"."yyyy-MM-dd',
+    date_pattern: '.yyyy-MM-dd',
     file: %(#{node.kafka.log_dir}/kafka-request.log),
     layout: {
       type: 'org.apache.log4j.PatternLayout',
@@ -151,7 +134,7 @@ default.kafka.log4j.appenders = {
   },
   'controllerAppender' => {
     type: 'org.apache.log4j.DailyRollingFileAppender',
-    date_pattern: '"."yyyy-MM-dd',
+    date_pattern: '.yyyy-MM-dd',
     file: %(#{node.kafka.log_dir}/kafka-controller.log),
     layout: {
       type: 'org.apache.log4j.PatternLayout',

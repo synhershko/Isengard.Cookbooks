@@ -1,6 +1,6 @@
 # kafka cookbook
 
-[![Build Status](https://travis-ci.org/mthssdrbrg/kafka-cookbook.png?branch=master)](https://travis-ci.org/mthssdrbrg/kafka-cookbook)
+[![Build Status](https://travis-ci.org/mthssdrbrg/kafka-cookbook.svg?branch=master)](https://travis-ci.org/mthssdrbrg/kafka-cookbook)
 
 Installs Kafka `v0.8.0`, and probably any newer versions.
 
@@ -42,10 +42,10 @@ Attributes concerning configuring of a Kafka broker are to be set under the
 the following are all valid ways to define broker configuration:
 
 ```ruby
-node.default.broker[:log_dirs] = %w[/tmp/kafka-logs]
-node.default.broker['log.dirs'] = %w[/tmp/kafka-logs]
-node.default.broker.log.dirs = %w[/tmp/kafka-logs]
-node.default[:broker][:log][:dirs] = %w[/tmp/kafka-logs]
+node.default.kafka.broker[:log_dirs] = %w[/tmp/kafka-logs]
+node.default.kafka.broker['log.dirs'] = %w[/tmp/kafka-logs]
+node.default.kafka.broker.log.dirs = %w[/tmp/kafka-logs]
+node.default[:kafka][:broker][:log][:dirs] = %w[/tmp/kafka-logs]
 ```
 
 A warning regarding the "dotted" notation, it doesn't play very well when
@@ -58,7 +58,7 @@ installing.
 
 ## Recipes
 
-This section describes the different recipes that exists, and how to use them.
+This section describes the different recipes that are available.
 
 ### default
 
