@@ -77,7 +77,7 @@ Defaults to installing `v0.8.1.1` of Kafka.
 
 ## Copyright
 
-Copyright :: 2013-2014 Mathias Söderberg and contributors
+Copyright :: 2013-2014 Mathias Soderberg and contributors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
