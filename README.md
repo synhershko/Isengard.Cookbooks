@@ -49,3 +49,6 @@ git subtree pull --prefix runit https://github.com/hw-cookbooks/runit.git master
 
 git subtree pull --predix sysctl https://github.com/onehealth-cookbooks/sysctl.git master --squash
 
+### ohai
+
+git subtree pull --prefix ohai https://github.com/opscode-cookbooks/ohai.git master --squash
