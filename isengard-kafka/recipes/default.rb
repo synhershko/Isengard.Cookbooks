@@ -1,6 +1,11 @@
 # Java version etc is determined and configured via attributes
 include_recipe 'java'
 
+# set vm.swapiness to 0 (to lessen swapping)
+sysctl_param 'vm.swappiness' do
+  value 0
+end
+
 # Get Kafka Zookeeper servers
 #zk_hosts = get_zk_nodes # get by roles
 
