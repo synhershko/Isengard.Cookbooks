@@ -44,3 +44,8 @@ git subtree pull --prefix build-essential https://github.com/opscode-cookbooks/b
 ### runit
 
 git subtree pull --prefix runit https://github.com/hw-cookbooks/runit.git master --squash
+
+### syscrl
+
+git subtree pull --predix sysctl https://github.com/onehealth-cookbooks/sysctl.git master --squash
+
