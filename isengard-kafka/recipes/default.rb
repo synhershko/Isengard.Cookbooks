@@ -12,13 +12,13 @@ end
 # get by opsworks layers (http://docs.aws.amazon.com/opsworks/latest/userguide/attributes-json-opsworks-layers.html)
 zk_hosts = Array.new
 node[:opsworks][:layers]['zookeeper'][:instances].each do |k,v|
-  Chef::Log.debug(v)
-  Chef::Log.debug(v[:public_dns_name])
-  zk_hosts << v[:public_dns_name]
+  # TODO: filter out :status != 'online'
+  Chef::Log.debug(v[:private_ip])
+  zk_hosts << v
 end
 
 # Override Kafka related node attributes
-node.override[:kafka][:zookeeper][:connect] = zk_hosts.map{|x| float_host(x[:hostname])}
+node.override[:kafka][:zookeeper][:connect] = zk_hosts.map{|x| x[:private_ip]}
 #node.override[:kafka][:base_url] = get_binary_server_url + "kafka"
 #node.override[:kafka][:host_name] = float_host(node[:fqdn])
 node.override[:kafka][:advertised_host_name] = node.hostname
