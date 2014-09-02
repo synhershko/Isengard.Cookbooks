@@ -16,7 +16,7 @@ node[:opsworks][:layers]['zookeeper'][:instances].each do |k,v|
 end
 
 # Override Kafka related node attributes
-node.override[:kafka][:broker][:hostname] = ''
+node.override[:kafka][:broker][:host.name] = ''
 node.override[:kafka][:broker][:zookeeper][:connect] = zk_hosts.map{|x| x[:private_ip]}
 node.override[:kafka][:advertised_host_name] = node.hostname
 node.override[:kafka][:automatic_start] = true
