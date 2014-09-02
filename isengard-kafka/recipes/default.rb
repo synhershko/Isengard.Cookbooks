@@ -13,12 +13,12 @@ include_recipe 'java'
 zk_hosts = Array.new
 node[:opsworks][:layers]['zookeeper'][:instances].each do |k,v|
   # TODO: filter out :status != 'online'
-  Chef::Log.debug(v[:private_ip])
+  Chef::Log.info(v[:private_ip])
   zk_hosts << v
 end
 
 # Override Kafka related node attributes
-node.override[:kafka][:zookeeper][:connect] = zk_hosts.map{|x| x[:private_ip]}
+node.override[:kafka][:broker][:zookeeper][:connect] = zk_hosts.map{|x| x[:private_ip]}
 #node.override[:kafka][:base_url] = get_binary_server_url + "kafka"
 #node.override[:kafka][:host_name] = float_host(node[:fqdn])
 node.override[:kafka][:advertised_host_name] = node.hostname
@@ -48,8 +48,8 @@ end
 ruby_block "kafkaup" do
   i = 0
   block do
-    brokerpath="/brokers/ids/#{node[:kafka][:broker_id]}"
-    zk_host = node[:kafka][:zookeeper][:connect].map{|zkh| "#{zkh}:2181"}.join(",")
+    brokerpath="/brokers/ids/#{node[:kafka][:broker][:broker_id]}"
+    zk_host = node[:kafka][:broker][:zookeeper][:connect].map{|zkh| "#{zkh}:2181"}.join(",")
     Chef::Log.info("Zookeeper hosts are #{zk_host}")
     sleep_time = 0.5
     kafka_in_zk = znode_exists?(brokerpath, zk_host)
